@@ -69,5 +69,21 @@ namespace WPFUI
             }
         }
 
+        public List<OrderModel> GetOrdersAfterDate(DateTime date)
+        {
+            using (var dbConnection = new Database().GetConnection)
+            {
+                dbConnection.Open();
+                string querydate = date.ToString("yyyy-MM-dd");
+                string dateresult = querydate;
+                
+
+                var sql = $"SELECT order_number, customer_number, employee_number, sale_price, deposit FROM practicaltest.orders WHERE order_date >= '{ querydate }'";
+                var result = dbConnection.Query<OrderModel>(sql).ToList();
+
+                return result;
+            }
+        }
+
     }
 }

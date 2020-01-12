@@ -53,6 +53,16 @@
                 </StackPanel>
             </StackPanel>
         </GroupBox>
+
+        <GroupBox Header="Refine Search" Grid.Column="3" Grid.Row="2" Margin="20">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                    <Label Content="From:" HorizontalAlignment="Right"/>
+                    <DatePicker x:Name="FromDate" Height="30"/>
+                </StackPanel>
+                <Button x:Name="RefineOrdersByDate" Content="Filter" Margin="5"/>
+            </StackPanel>
+        </GroupBox>
         
         
         <!-- Row 3 -->
@@ -87,7 +97,7 @@
                     <Label Content="Postcode:" Width="120" HorizontalContentAlignment="Right"/>
                     <TextBlock x:Name="SelectedEmployee_Postcode" VerticalAlignment="Center" />
                 </StackPanel>
-                
+
             </StackPanel>
         </GroupBox>
     </Grid>
