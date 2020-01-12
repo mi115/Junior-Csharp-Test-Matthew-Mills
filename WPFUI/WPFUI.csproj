@@ -100,7 +100,6 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="Models\BranchModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\OrderModel.cs" />

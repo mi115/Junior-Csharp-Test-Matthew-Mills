@@ -55,18 +55,6 @@ namespace WPFUI
             }
         }
 
-        public BranchModel GetBranchFromEmployeeNumber(int EmployeeNumber)
-        {
-            using (var dbConnection = new Database().GetConnection)
-            {
-                dbConnection.Open();
-
-                var sql = $"SELECT br.branch_name, br.postcode FROM practicaltest.employees as em JOIN practicaltest.branches as br on em.branch_name = br.branch_name WHERE employee_number = '{ EmployeeNumber }'";
-                var result = dbConnection.Query<BranchModel>(sql).FirstOrDefault();
-
-                return result;
-            }
-        }
 
         public List<EmployeeModel> GetAllEmployees()
         {

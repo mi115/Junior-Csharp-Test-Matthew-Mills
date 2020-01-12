@@ -16,6 +16,7 @@ namespace WPFUI.ViewModels
 		private OrderModel _selectedOrder;
 		private CustomerModel _selectedCustomer;
 		private List<EmployeeModel> employees;
+		private EmployeeModel _selectedEmployee;
 
 		public MainViewModel()
 		{
@@ -69,21 +70,8 @@ namespace WPFUI.ViewModels
 			}
 		}
 
-		private BranchModel _selectedBranch;
 
-		public BranchModel SelectedBranch
-		{
-			get 
-			{ 
-				return _selectedBranch; 
-			}
-			set 
-			{
-				_selectedBranch = value; 
-			}
-		}
-
-		private EmployeeModel _selectedEmployee;
+		
 
 		public EmployeeModel SelectedEmployee
 		{
