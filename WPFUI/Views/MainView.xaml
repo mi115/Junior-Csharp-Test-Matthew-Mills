@@ -1,0 +1,94 @@
+﻿<Window x:Class="WPFUI.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFUI.Views"
+        mc:Ignorable="d" 
+        Title="Costcutter Order Browser" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <!-- Row 1 -->
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2" Text="Order Browser"/>
+        
+        
+        <!-- Row 2 -->
+        <ComboBox x:Name="Order" 
+                  SelectedItem="{Binding Path=SelectedOrder, Mode=OneWayToSource}" 
+                  DisplayMemberPath="Number" 
+                  Grid.Column="1" Grid.Row="2" Margin="0, 20, 0, 20" 
+                  MinWidth="100 " Height="20" IsEditable="True" VerticalAlignment="Top" MaxDropDownHeight="101"/>
+        
+        <GroupBox Header="Order Details" Grid.Column="2" Grid.Row="2" Margin="20">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Order Number:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedOrder_Number"  VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Sale Price:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedOrder_SalePrice" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Deposit:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedOrder_Deposit" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        
+        
+        <!-- Row 3 -->
+        <GroupBox Header="Customer Details" Grid.Column="1" Grid.Row="3" Margin="20">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Customer Number:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedCustomer_CustomerNumber" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Forename:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedCustomer_Forename" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Surname:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedCustomer_Surname" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Phone:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedCustomer_TelephoneNumber" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Branch Details" Grid.Column="2" Grid.Row="3" Margin="20">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Branch Name:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedEmployee_BranchName" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Postcode:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedEmployee_Postcode" VerticalAlignment="Center" />
+                </StackPanel>
+                
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
