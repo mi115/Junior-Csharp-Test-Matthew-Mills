@@ -19,5 +19,15 @@ namespace WPFUI.Models
         public int EmployeeNumber { get => employee_number; set => employee_number = value; }
         public decimal SalePrice { get => sale_price; set => sale_price = value; }
         public decimal Deposit { get; set; }
+
+        private DateTime order_date;
+
+        public DateTime OrderDate
+        {
+            get { return order_date.Date; }
+            set { order_date = value; }
+        }
+
+
     }
 }

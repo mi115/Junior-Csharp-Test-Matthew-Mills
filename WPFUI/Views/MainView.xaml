@@ -35,13 +35,23 @@
                   SelectedItem="{Binding Path=SelectedOrder, Mode=OneWayToSource}" 
                   DisplayMemberPath="Number" 
                   Grid.Column="1" Grid.Row="2" Margin="0, 20, 0, 20" 
-                  MinWidth="100 " Height="20" IsEditable="True" VerticalAlignment="Top" MaxDropDownHeight="101"/>
-        
+                  MinWidth="100 " Height="20" IsEditable="True" VerticalAlignment="Top" MaxDropDownHeight="101">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
+
         <GroupBox Header="Order Details" Grid.Column="2" Grid.Row="2" Margin="20">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Order Number:" Width="120" HorizontalContentAlignment="Right"/>
                     <TextBlock x:Name="SelectedOrder_Number"  VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Order Date:" Width="120" HorizontalContentAlignment="Right"/>
+                    <TextBlock x:Name="SelectedOrder_OrderDate"  VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Sale Price:" Width="120" HorizontalContentAlignment="Right"/>
@@ -61,6 +71,7 @@
                     <DatePicker x:Name="FromDate" Height="30"/>
                 </StackPanel>
                 <Button x:Name="RefineOrdersByDate" Content="Filter" Margin="5"/>
+                <Button x:Name="ClearOrdersFilter" Content="Remove Filter" Margin="5"/>
             </StackPanel>
         </GroupBox>
         
@@ -97,8 +108,23 @@
                     <Label Content="Postcode:" Width="120" HorizontalContentAlignment="Right"/>
                     <TextBlock x:Name="SelectedEmployee_Postcode" VerticalAlignment="Center" />
                 </StackPanel>
-
             </StackPanel>
         </GroupBox>
+
+        <GroupBox Header="Applied Filters" Grid.Column="3" Grid.Row="3" Margin="20">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Date filter from:" Width="120" HorizontalAlignment="Right"/>
+                    <TextBlock  x:Name="AppliedDateFilter" Text="{Binding Path=FromDate, StringFormat={}{0:dd/MM/yyyy}, Mode=OneWay}" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        
+        
+        <!-- Row 4 -->
+        
+        
+        <!-- Row 5 -->
+        <StatusBar Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="4" Visibility="Visible" x:Name="StatusBar" FontFamily="Segeo Light" FontStyle="Normal"/>
     </Grid>
 </Window>

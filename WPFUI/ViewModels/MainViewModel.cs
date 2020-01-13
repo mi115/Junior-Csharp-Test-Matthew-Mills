@@ -24,14 +24,24 @@ namespace WPFUI.ViewModels
 			Database db = new Database();
 			Order = db.GetAllOrders();
 			Employees = db.GetAllEmployees();
+			StatusBar = "Ready";
 			
 			
+		}
+
+		public void ClearOrdersFilter()
+		{
+			Database db = new Database();
+			Order = db.GetAllOrders();
+			FromDate = new DateTime(1, 1, 1);
+			StatusBar = "Date Filter Cleared";
 		}
 
 		public void RefineOrdersByDate()
 		{
 			Database db = new Database();
 			Order = db.GetOrdersAfterDate(FromDate.Date);
+			StatusBar = $"Orders Filtered to Dates After { FromDate.Date }";
 		}
 
 		private DateTime _fromdate;
@@ -39,7 +49,11 @@ namespace WPFUI.ViewModels
 		public DateTime FromDate
 		{
 			get { return _fromdate; }
-			set { _fromdate = value; }
+			set 
+			{
+				_fromdate = value;
+				NotifyOfPropertyChange(() => FromDate);
+			}
 		}
 
 
@@ -88,15 +102,40 @@ namespace WPFUI.ViewModels
 				_selectedCustomer = value;
 			}
 		}
-
-
 		
-
 		public EmployeeModel SelectedEmployee
 		{
 			get { return _selectedEmployee; }
 			set { _selectedEmployee = value; }
 		}
+
+		private DateTime _appliedDateFilter;
+
+		public DateTime AppliedDateFilter
+		{
+			get 
+			{ 
+				return _appliedDateFilter.Date; 
+			}
+			set 
+			{ 
+				_appliedDateFilter = value;
+			}
+		}
+
+		private string _statusBar;
+
+		public string StatusBar
+		{
+			get { return _statusBar; }
+			set 
+			{
+				_statusBar = value;
+				NotifyOfPropertyChange(() => StatusBar);
+			}
+		}
+
+
 
 
 
