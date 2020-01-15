@@ -18,6 +18,10 @@ namespace WPFUI.ViewModels
 		private CustomerModel _selectedCustomer;
 		private List<EmployeeModel> employees;
 		private EmployeeModel _selectedEmployee;
+		private DateTime _fromdate;
+		private DateTime _appliedDateFilter;
+		private string _statusBar;
+
 
 		public MainViewModel()
 		{
@@ -44,8 +48,6 @@ namespace WPFUI.ViewModels
 			StatusBar = $"Orders Filtered to Dates After { FromDate.Date }";
 		}
 
-		private DateTime _fromdate;
-
 		public DateTime FromDate
 		{
 			get { return _fromdate; }
@@ -55,7 +57,6 @@ namespace WPFUI.ViewModels
 				NotifyOfPropertyChange(() => FromDate);
 			}
 		}
-
 
 		public List<OrderModel> Order
 		{
@@ -83,11 +84,24 @@ namespace WPFUI.ViewModels
 			{
 				_selectedOrder = value;
 				NotifyOfPropertyChange(() => SelectedOrder);
-				Database db = new Database();
-				_selectedCustomer = db.GetCustomerFromCustomerNumber(SelectedOrder.CustomerNumber);
-				NotifyOfPropertyChange(() => SelectedCustomer);
-				_selectedEmployee = Employees.Find(x => x.EmployeeNumber == SelectedOrder.EmployeeNumber);
-				NotifyOfPropertyChange(() => SelectedEmployee);
+				if (_selectedOrder == null)
+				{
+					SelectedCustomer = null;
+					NotifyOfPropertyChange(() => SelectedCustomer);
+					SelectedEmployee = null;
+					NotifyOfPropertyChange(() => SelectedEmployee);
+					StatusBar = "Not a valid Order Number within the filters applied.";
+				}
+				else 
+				{
+					Database db = new Database();
+					_selectedCustomer = db.GetCustomerFromCustomerNumber(SelectedOrder.CustomerNumber);
+					NotifyOfPropertyChange(() => SelectedCustomer);
+					_selectedEmployee = Employees.Find(x => x.EmployeeNumber == SelectedOrder.EmployeeNumber);
+					NotifyOfPropertyChange(() => SelectedEmployee);
+					StatusBar = "Order Aquired";
+				}
+				
 			}
 		}
 
@@ -109,8 +123,6 @@ namespace WPFUI.ViewModels
 			set { _selectedEmployee = value; }
 		}
 
-		private DateTime _appliedDateFilter;
-
 		public DateTime AppliedDateFilter
 		{
 			get 
@@ -122,8 +134,6 @@ namespace WPFUI.ViewModels
 				_appliedDateFilter = value;
 			}
 		}
-
-		private string _statusBar;
 
 		public string StatusBar
 		{

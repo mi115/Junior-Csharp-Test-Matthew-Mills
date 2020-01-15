@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
         mc:Ignorable="d" 
-        Title="Costcutter Order Browser" Height="600" Width="800">
+        Title="Costcutter Order Browser" Height="600" Width="800"
+        Language="en-GB">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -30,36 +31,42 @@
         <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2" Text="Order Browser"/>
         
         
+        
+        
         <!-- Row 2 -->
-        <ComboBox x:Name="Order" 
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical" >
+            <Label Content="Order Number:" Margin="0, 20, 0, 0"/>
+            <ComboBox x:Name="Order" 
                   SelectedItem="{Binding Path=SelectedOrder, Mode=OneWayToSource}" 
                   DisplayMemberPath="Number" 
-                  Grid.Column="1" Grid.Row="2" Margin="0, 20, 0, 20" 
+                  Grid.Column="1" Grid.Row="2" Margin="0, 5, 0, 20" 
                   MinWidth="100 " Height="20" IsEditable="True" VerticalAlignment="Top" MaxDropDownHeight="101">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel/>
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
-        </ComboBox>
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+        </StackPanel>
+        
 
         <GroupBox Header="Order Details" Grid.Column="2" Grid.Row="2" Margin="20">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Order Number:" Width="120" HorizontalContentAlignment="Right"/>
+                    <Label Content="Order Number:" Width="120" HorizontalContentAlignment="Left"/>
                     <TextBlock x:Name="SelectedOrder_Number"  VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Order Date:" Width="120" HorizontalContentAlignment="Right"/>
-                    <TextBlock x:Name="SelectedOrder_OrderDate"  VerticalAlignment="Center"/>
+                    <Label Content="Order Date:" Width="120" HorizontalContentAlignment="Left"/>
+                    <TextBlock x:Name="SelectedOrder_OrderDate" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Sale Price:" Width="120" HorizontalContentAlignment="Right"/>
-                    <TextBlock x:Name="SelectedOrder_SalePrice" VerticalAlignment="Center" />
+                    <Label Content="Sale Price:" Width="120" HorizontalContentAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=SelectedOrder.SalePrice, StringFormat={}{0:C}, Mode=OneWay}" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Deposit:" Width="120" HorizontalContentAlignment="Right"/>
-                    <TextBlock x:Name="SelectedOrder_Deposit" VerticalAlignment="Center" />
+                    <Label Content="Deposit:" Width="120" HorizontalContentAlignment="Left"/>
+                    <TextBlock Text="{Binding Path=SelectedOrder.Deposit, StringFormat={}{0:C}, Mode=OneWay}" VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
         </GroupBox>
@@ -67,7 +74,7 @@
         <GroupBox Header="Refine Search" Grid.Column="3" Grid.Row="2" Margin="20">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                    <Label Content="From:" HorizontalAlignment="Right"/>
+                    <Label Content="From:" HorizontalAlignment="Left"/>
                     <DatePicker x:Name="FromDate" Height="30"/>
                 </StackPanel>
                 <Button x:Name="RefineOrdersByDate" Content="Filter" Margin="5"/>
@@ -80,19 +87,19 @@
         <GroupBox Header="Customer Details" Grid.Column="1" Grid.Row="3" Margin="20">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Customer Number:" Width="120" HorizontalContentAlignment="Right"/>
+                    <Label Content="Customer Number:" Width="120" HorizontalContentAlignment="Left"/>
                     <TextBlock x:Name="SelectedCustomer_CustomerNumber" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Forename:" Width="120" HorizontalContentAlignment="Right"/>
+                    <Label Content="Forename:" Width="120" HorizontalContentAlignment="Left"/>
                     <TextBlock x:Name="SelectedCustomer_Forename" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Surname:" Width="120" HorizontalContentAlignment="Right"/>
+                    <Label Content="Surname:" Width="120" HorizontalContentAlignment="Left"/>
                     <TextBlock x:Name="SelectedCustomer_Surname" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Phone:" Width="120" HorizontalContentAlignment="Right"/>
+                    <Label Content="Phone:" Width="120" HorizontalContentAlignment="Left"/>
                     <TextBlock x:Name="SelectedCustomer_TelephoneNumber" VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
@@ -101,11 +108,11 @@
         <GroupBox Header="Branch Details" Grid.Column="2" Grid.Row="3" Margin="20">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Branch Name:" Width="120" HorizontalContentAlignment="Right"/>
+                    <Label Content="Branch Name:" Width="120" HorizontalContentAlignment="Left"/>
                     <TextBlock x:Name="SelectedEmployee_BranchName" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Postcode:" Width="120" HorizontalContentAlignment="Right"/>
+                    <Label Content="Postcode:" Width="120" HorizontalContentAlignment="Left"/>
                     <TextBlock x:Name="SelectedEmployee_Postcode" VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
@@ -114,7 +121,7 @@
         <GroupBox Header="Applied Filters" Grid.Column="3" Grid.Row="3" Margin="20">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Date filter from:" Width="120" HorizontalAlignment="Right"/>
+                    <Label Content="Date filter from:" Width="120" HorizontalAlignment="Left"/>
                     <TextBlock  x:Name="AppliedDateFilter" Text="{Binding Path=FromDate, StringFormat={}{0:dd/MM/yyyy}, Mode=OneWay}" VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
