@@ -39,7 +39,7 @@
             <ComboBox x:Name="Order" 
                   SelectedItem="{Binding Path=SelectedOrder, Mode=OneWayToSource}" 
                   DisplayMemberPath="Number" 
-                  Grid.Column="1" Grid.Row="2" Margin="0, 5, 0, 20" 
+                  Grid.Column="1" Grid.Row="2" Margin="0, 5, 0, 5" 
                   MinWidth="100 " Height="20" IsEditable="True" VerticalAlignment="Top" MaxDropDownHeight="101">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -47,6 +47,7 @@
                     </ItemsPanelTemplate>
                 </ComboBox.ItemsPanel>
             </ComboBox>
+            <Button x:Name="ReloadOrders" Content="Reload Orders" Margin="5"/>
         </StackPanel>
         
 

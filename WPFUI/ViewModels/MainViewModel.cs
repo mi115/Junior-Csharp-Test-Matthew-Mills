@@ -22,15 +22,29 @@ namespace WPFUI.ViewModels
 		private DateTime _appliedDateFilter;
 		private string _statusBar;
 
-
 		public MainViewModel()
 		{
 			Database db = new Database();
 			Order = db.GetAllOrders();
 			Employees = db.GetAllEmployees();
 			StatusBar = "Ready";
-			
-			
+		}
+
+		public void ReloadOrders()
+		{
+			Database db = new Database();
+			DateTime IfFromDate = new DateTime(1, 1, 1);
+			if (FromDate.Date == IfFromDate.Date)
+			{
+				Order = db.GetAllOrders();
+				StatusBar = "Orders Reloaded";
+			}
+			else
+			{
+				Order = db.GetOrdersAfterDate(FromDate.Date);
+				StatusBar = $"Reloaded Orders Filtered to Dates After { FromDate.Date }";
+			}
+			;
 		}
 
 		public void ClearOrdersFilter()
@@ -50,7 +64,10 @@ namespace WPFUI.ViewModels
 
 		public DateTime FromDate
 		{
-			get { return _fromdate; }
+			get 
+			{
+				return _fromdate; 
+			}
 			set 
 			{
 				_fromdate = value;
@@ -60,7 +77,10 @@ namespace WPFUI.ViewModels
 
 		public List<OrderModel> Order
 		{
-			get { return _order; }
+			get 
+			{
+				return _order; 
+			}
 			set 
 			{
 				_order = value;
@@ -70,8 +90,14 @@ namespace WPFUI.ViewModels
 		
 		public List<EmployeeModel> Employees
 		{
-			get { return employees; }
-			set { employees = value; }
+			get 
+			{
+				return employees; 
+			}
+			set 
+			{ 
+				employees = value; 
+			}
 		}
 
 		public OrderModel SelectedOrder
@@ -119,8 +145,13 @@ namespace WPFUI.ViewModels
 		
 		public EmployeeModel SelectedEmployee
 		{
-			get { return _selectedEmployee; }
-			set { _selectedEmployee = value; }
+			get 
+			{
+				return _selectedEmployee; 
+			}
+			set {
+				_selectedEmployee = value; 
+			}
 		}
 
 		public DateTime AppliedDateFilter
@@ -137,7 +168,10 @@ namespace WPFUI.ViewModels
 
 		public string StatusBar
 		{
-			get { return _statusBar; }
+			get 
+			{
+				return _statusBar; 
+			}
 			set 
 			{
 				_statusBar = value;
