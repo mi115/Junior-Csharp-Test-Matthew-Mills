@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using WPFUI.Models;
 using static WPFUI.Database;
-
+using WPFUI;
+using MySql.Data.MySqlClient;
 
 namespace WPFUI.ViewModels
 {
-    public class MainViewModel : Screen
-    {
+	public class MainViewModel : Screen
+	{
 		private List<OrderModel> _order;
-		private OrderModel _selectedOrder;
+		private OrderModel _selectedOrder = new OrderModel();
 		private CustomerModel _selectedCustomer;
 		private List<EmployeeModel> employees;
 		private EmployeeModel _selectedEmployee;
@@ -25,41 +26,69 @@ namespace WPFUI.ViewModels
 		public MainViewModel()
 		{
 			Database db = new Database();
-			Order = db.GetAllOrders();
-			Employees = db.GetAllEmployees();
-			StatusBar = "Ready";
+			if (db.IsAvailable())
+			{
+				Order = db.GetAllOrders();
+				Employees = db.GetAllEmployees();
+				StatusBar = "Ready";
+			}
+			else 
+			{
+				MessageBox.Show("Failed to establish Database Connection");
+			}
 		}
 
 		public void ReloadOrders()
 		{
 			Database db = new Database();
-			DateTime IfFromDate = new DateTime(1, 1, 1);
-			if (FromDate.Date == IfFromDate.Date)
+			if (db.IsAvailable())
 			{
-				Order = db.GetAllOrders();
-				StatusBar = "Orders Reloaded";
+				DateTime IfFromDate = new DateTime(1, 1, 1);
+				if (FromDate.Date == IfFromDate.Date)
+				{
+					Order = db.GetAllOrders();
+					StatusBar = "Orders Reloaded";
+				}
+				else
+				{
+					Order = db.GetOrdersAfterDate(FromDate.Date);
+					StatusBar = $"Reloaded Orders Filtered to Dates After { FromDate.Date }";
+				}
 			}
 			else
 			{
-				Order = db.GetOrdersAfterDate(FromDate.Date);
-				StatusBar = $"Reloaded Orders Filtered to Dates After { FromDate.Date }";
+				MessageBox.Show("Failed to establish Database Connection");
 			}
-			;
+
 		}
 
 		public void ClearOrdersFilter()
 		{
 			Database db = new Database();
-			Order = db.GetAllOrders();
-			FromDate = new DateTime(1, 1, 1);
-			StatusBar = "Date Filter Cleared";
+			if (db.IsAvailable())
+			{
+				Order = db.GetAllOrders();
+				FromDate = new DateTime(1, 1, 1);
+				StatusBar = "Date Filter Cleared";
+			}
+			else 
+			{
+				MessageBox.Show("Failed to establish Database Connection");
+			}
 		}
 
 		public void RefineOrdersByDate()
 		{
 			Database db = new Database();
-			Order = db.GetOrdersAfterDate(FromDate.Date);
-			StatusBar = $"Orders Filtered to Dates After { FromDate.Date }";
+			if (db.IsAvailable())
+			{
+				Order = db.GetOrdersAfterDate(FromDate.Date);
+				StatusBar = $"Orders Filtered to Dates After { FromDate.Date }";
+			}
+			else 
+			{
+				MessageBox.Show("Failed to establish Database Connection");
+			}
 		}
 
 		public DateTime FromDate
@@ -178,6 +207,8 @@ namespace WPFUI.ViewModels
 				NotifyOfPropertyChange(() => StatusBar);
 			}
 		}
+
+		
 
 
 

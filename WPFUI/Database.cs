@@ -29,6 +29,14 @@ namespace WPFUI
             return result;
         }
 
+        public bool IsAvailable()
+        {
+            return TestDBConnection.IsAvailable(this.GetConnection);
+        }
+        
+
+
+
         public List<OrderModel> GetAllOrders()
         {
             using ( var dbConnection = new Database().GetConnection)
