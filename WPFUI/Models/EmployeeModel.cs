@@ -9,15 +9,14 @@ namespace WPFUI.Models
     public class EmployeeModel
     {
 		private int employee_number;
+		private string branch_name;
+		private string postcode;
 
 		public int EmployeeNumber
 		{
 			get { return employee_number; }
 			set { employee_number = value; }
 		}
-
-		private string branch_name;
-		private string postcode;
 
 		public string BranchName
 		{
